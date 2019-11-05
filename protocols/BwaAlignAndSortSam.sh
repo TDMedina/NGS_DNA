@@ -49,10 +49,10 @@ then
 		-M \
 		-R "${READGROUPLINE}" \
 		-t 4 \
+		-o "${tmpAlignedSam}" \
 		"${indexFile}" \
 		"${fastq1}" \
-		"${fastq2}" \
-		> "${tmpAlignedSam}" &
+		"${fastq2}"
 
 	gatk --java-options "-Djava.io.tmpdir=${tempDir} -Xmx12G -XX:ParallelGCThreads=2" SortSam \
         --INPUT="${tmpAlignedSam}" \
@@ -74,9 +74,9 @@ else
 		-M \
 		-R "${READGROUPLINE}" \
 		-t 4 \
+		-o "${tmpAlignedSam}" \
 		"${indexFile}" \
-		"${srBarcodeRecodedFqGz}" \
-		> "${tmpAlignedSam}" &
+		"${srBarcodeRecodedFqGz}"
 
 	gatk --java-options "-Djava.io.tmpdir=${tempDir} -Xmx12G -XX:ParallelGCThreads=2" SortSam \
         --INPUT="${tmpAlignedSam}" \
