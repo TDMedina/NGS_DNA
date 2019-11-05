@@ -45,14 +45,14 @@ if [ "${seqType}" == "PE" ]
 then
 	#Run BWA for paired-end
 
-	bwa mem \
-	-M \
-	-R "${READGROUPLINE}" \
-	-t 4 \
-	"${indexFile}" \
-	"${fastq1}" \
-	"${fastq2}" \
-	> "${tmpAlignedSam}" &
+	"${EBROOTBWA}"/bwa-mem2 mem \
+		-M \
+		-R "${READGROUPLINE}" \
+		-t 4 \
+		"${indexFile}" \
+		"${fastq1}" \
+		"${fastq2}" \
+		> "${tmpAlignedSam}" &
 
 	gatk --java-options "-Djava.io.tmpdir=${tempDir} -Xmx12G -XX:ParallelGCThreads=2" SortSam \
         --INPUT="${tmpAlignedSam}" \
