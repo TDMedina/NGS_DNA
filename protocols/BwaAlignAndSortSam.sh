@@ -70,13 +70,13 @@ then
 
 else
 	#Run BWA for single-read
-	bwa mem \
-	-M \
-	-R "${READGROUPLINE}" \
-	-t 4 \
-	"${indexFile}" \
-	"${srBarcodeRecodedFqGz}" \
-	> "${tmpAlignedSam}" &
+	"${EBROOTBWA}"/bwa-mem2 mem \
+		-M \
+		-R "${READGROUPLINE}" \
+		-t 4 \
+		"${indexFile}" \
+		"${srBarcodeRecodedFqGz}" \
+		> "${tmpAlignedSam}" &
 
 	gatk --java-options "-Djava.io.tmpdir=${tempDir} -Xmx12G -XX:ParallelGCThreads=2" SortSam \
         --INPUT="${tmpAlignedSam}" \
